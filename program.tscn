@@ -1,0 +1,92 @@
+[gd_scene load_steps=2 format=3 uid="uid://8eiykyvvihgt"]
+
+[ext_resource type="Script" path="res://program.gd" id="1_f7e4f"]
+
+[node name="Program" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f7e4f")
+
+[node name="Aligner" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 520.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="OpenButton" type="Button" parent="Aligner"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Open Image"
+expand_icon = true
+
+[node name="Copy Text" type="Button" parent="Aligner"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Copy Text"
+expand_icon = true
+
+[node name="Info" type="Button" parent="Aligner"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Info"
+expand_icon = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_top = 34.0
+offset_right = 500.0
+offset_bottom = 600.0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextEdit" type="TextEdit" parent="Margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+wrap_mode = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(392, 159)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="InfoDialog" type="AcceptDialog" parent="."]
+title = "Info"
+initial_position = 2
+size = Vector2i(293, 132)
+ok_button_text = "Close"
+dialog_text = "Made by TheCraze312
+
+Converts image files into hex values"
+
+[node name="CopyDialog" type="AcceptDialog" parent="."]
+title = "Dialog"
+initial_position = 2
+size = Vector2i(294, 132)
+ok_button_text = "Close"
+dialog_text = "Text Copied!"
+
+[node name="CopyEmptyDialog" type="AcceptDialog" parent="."]
+title = "Alert"
+initial_position = 2
+size = Vector2i(294, 132)
+ok_button_text = "Close"
+dialog_text = "Open an image first!"
+
+[connection signal="pressed" from="Aligner/OpenButton" to="." method="_on_open_button_pressed"]
+[connection signal="pressed" from="Aligner/Copy Text" to="." method="_on_copy_text_pressed"]
+[connection signal="pressed" from="Aligner/Info" to="." method="_on_info_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
